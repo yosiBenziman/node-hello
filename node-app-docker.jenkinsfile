@@ -9,9 +9,6 @@ pipeline {
        nodejs "nodejs"
      }
 
-     tools {
-       Docker "docker"
-     }
    stages {
      stage('Cloning Git') {
        steps {
