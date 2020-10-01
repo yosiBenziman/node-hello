@@ -7,6 +7,7 @@ pipeline {
    agent any
    tools {
        nodejs "nodejs"
+       Docker "docker"
      }
    stages {
      stage('Cloning Git') {
