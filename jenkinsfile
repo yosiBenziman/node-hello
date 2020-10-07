@@ -45,14 +45,13 @@ pipeline {
 
        stage('Docker Deploy Dev'){
             steps{
-                sshagent(['ec2-user']) {
+                sshagent(credentials: ['ec-user']) {
                     
                         sh "scp -o StrictHostKeyChecking=no app.yml ec2-user@yosi-kube:/home/ec2-user"
+                        sh "ssh ec2-user@yosi-kube kubectl apply -f ."
                     }
 		
-                  script{
-                    sh "ssh ec2-user@yosi-kube kubectl apply -f ."
-                  }
+    
                 }
             }
         }
