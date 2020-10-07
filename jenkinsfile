@@ -24,7 +24,7 @@ pipeline {
      stage('Building image') {
        steps{
          script {
-           dockerImage = docker.build dockerRegistry + ":$BUILD_NUMBER"
+           dockerImage = docker.build dockerRegistry + ":latest"
          }
        }
      }
@@ -39,7 +39,7 @@ pipeline {
      }
      stage('Remove Unused docker image') {
        steps{
-         sh "docker rmi $dockerRegistry:$BUILD_NUMBER"
+         sh "docker rmi $dockerRegistry:latest"
        }
      }
 
@@ -50,8 +50,6 @@ pipeline {
                         sh "scp -o StrictHostKeyChecking=no app.yml ec2-user@yosi-kube:/home/ec2-user"
                         sh "ssh ec2-user@yosi-kube microk8s.kubectl apply -f ."
                     }
-		
-    
                 }
             }
         }
