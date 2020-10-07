@@ -43,12 +43,17 @@ pipeline {
        }
      }
 
-       stage('Deploy App') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "app.yml", kubeconfigId: "kubernetes")
+       stage('Docker Deploy Dev'){
+            steps{
+                sshagent(['yosi-kube']) {
+                    
+                        sh "scp -o StrictHostKeyChecking=no app.yml ec2-user@yosi-kube:/home/ec2-user"
+                    }
+		
+                  script{
+                    sh "ssh ec2-user@yosi-kube kubectl apply -f ."
+                  }
+                }
+            }
         }
-     }
    }
-   }
- }
