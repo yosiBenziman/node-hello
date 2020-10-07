@@ -48,7 +48,7 @@ pipeline {
                 sshagent(credentials: ['ec2-user']) {
                     
                         sh "scp -o StrictHostKeyChecking=no app.yml ec2-user@yosi-kube:/home/ec2-user"
-                        sh "ssh ec2-user@yosi-kube kubectl apply -f ."
+                        sh "ssh ec2-user@yosi-kube microk8s.kubectl apply -f ."
                     }
 		
     
