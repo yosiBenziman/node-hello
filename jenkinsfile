@@ -45,7 +45,7 @@ pipeline {
 
        stage('Docker Deploy Dev'){
             steps{
-                sshagent(['yosi-kube']) {
+                sshagent(['ec2-user']) {
                     
                         sh "scp -o StrictHostKeyChecking=no app.yml ec2-user@yosi-kube:/home/ec2-user"
                     }
