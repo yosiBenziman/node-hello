@@ -41,6 +41,7 @@ pipeline {
        steps{
          sh "docker rmi $dockerRegistry:$BUILD_NUMBER"
        }
+     }
 
        stage('Deploy App') {
       steps {
